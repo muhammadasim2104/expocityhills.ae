@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Cormorant, Jost } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import RegisterModalProvider from "@/components/RegisterModalProvider";
+import FloatingRegisterButton from "@/components/FloatingRegisterButton";
 import "./globals.css";
 
 const cormorant = Cormorant({
@@ -21,17 +23,16 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://expocityhills.ae"),
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${cormorant.variable} ${jost.variable}`}>
       <body className="flex min-h-screen flex-col antialiased">
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <RegisterModalProvider>
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+          <FloatingRegisterButton />
+        </RegisterModalProvider>
       </body>
     </html>
   );

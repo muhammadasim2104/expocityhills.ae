@@ -1,70 +1,66 @@
+import Image from "next/image";
 import Link from "next/link";
-import HeroCanvas from "@/components/HeroCanvas";
-import { project } from "@/lib/data";
+import HeroActions from "@/components/HeroActions";
+import { heroImage, project } from "@/lib/data";
 
 type HeroProps = {
-  eyebrow?: string;
   title: string;
   subtitle?: string;
+  image?: string;
   compact?: boolean;
-  showCanvas?: boolean;
-  primaryCta?: { label: string; href: string };
-  secondaryCta?: { label: string; href: string };
+  exploreText?: string;
+  exploreHref?: string;
 };
 
 export default function Hero({
-  eyebrow = `${project.developer} · ${project.district}, ${project.masterPlan}`,
   title,
   subtitle,
+  image = heroImage,
   compact = false,
-  showCanvas = true,
-  primaryCta = { label: "Register Your Interest", href: "/#register" },
-  secondaryCta = { label: "Explore Expo City Hills", href: "/#about" },
+  exploreText = "Explore Expo City Hills",
+  exploreHref = "/#about",
 }: HeroProps) {
   return (
-    <section
-      className={`relative overflow-hidden bg-forest-dark text-white ${
-        compact ? "min-h-[50vh]" : "min-h-screen"
-      }`}
-    >
-      {showCanvas && (
-        <div className="absolute inset-0 lg:left-[45%]">
-          <HeroCanvas />
-        </div>
-      )}
-      {!showCanvas && (
-        <div className="absolute inset-0 hero-canvas-bg" aria-hidden="true" />
-      )}
-      <div className="absolute inset-0 bg-gradient-to-r from-forest-dark/90 via-forest-dark/70 to-forest-dark/30 lg:via-forest-dark/50" />
+    <section className={`relative overflow-hidden ${compact ? "min-h-[60vh]" : "min-h-screen"}`}>
+      <Image
+        src={image}
+        alt={`${project.name} — ${project.district}, ${project.masterPlan}`}
+        fill
+        priority
+        unoptimized
+        className="object-cover"
+        sizes="100vw"
+      />
+      <div className="absolute inset-0 bg-gradient-to-r from-forest-dark/85 via-forest-dark/50 to-forest-dark/20" />
+      <div className="absolute inset-0 bg-gradient-to-t from-forest-dark/70 via-transparent to-forest-dark/30" />
 
       <div
-        className={`relative mx-auto flex max-w-7xl flex-col px-4 sm:px-6 lg:max-w-[55%] lg:px-8 ${
-          compact
-            ? "min-h-[50vh] justify-end pb-16 pt-28"
-            : "min-h-screen justify-center pb-20 pt-32 lg:pb-28"
+        className={`relative mx-auto flex max-w-7xl flex-col px-4 sm:px-6 lg:px-8 ${
+          compact ? "min-h-[60vh] justify-end pb-16 pt-28" : "min-h-screen justify-end pb-20 pt-32 lg:pb-28"
         }`}
       >
-        <div className="max-w-xl">
-          <p className="label-caps text-accent-light/80">{eyebrow}</p>
-          <h1 className="mt-4 font-serif text-4xl font-light leading-[1.05] sm:text-5xl lg:text-6xl">
+        <div className="max-w-2xl">
+          <p className="label-caps text-accent-light">
+            {project.developer} · {project.district}, {project.masterPlan}
+          </p>
+          <h1 className="mt-4 font-serif text-4xl font-light leading-[1.05] text-white sm:text-5xl lg:text-6xl">
             {title}
           </h1>
           {subtitle && (
-            <p className="mt-5 text-base leading-relaxed text-white/80 sm:text-lg">
+            <p className="mt-5 max-w-lg text-base leading-relaxed text-white/85 sm:text-lg">
               {subtitle}
             </p>
           )}
           {!compact && (
-            <div className="mt-8 flex flex-wrap gap-4">
-              <Link href={primaryCta.href} className="btn-editorial btn-editorial-primary">
-                {primaryCta.label}
-              </Link>
-              <Link href={secondaryCta.href} className="btn-editorial btn-editorial-bordered">
-                {secondaryCta.label}
-              </Link>
-            </div>
+            <HeroActions exploreText={exploreText} exploreHref={exploreHref} />
           )}
         </div>
+        {!compact && (
+          <div className="absolute bottom-8 left-4 sm:left-6 lg:left-8">
+            <p className="label-caps text-white/50">Scroll to explore</p>
+            <div className="mt-2 h-10 w-px bg-white/40" />
+          </div>
+        )}
       </div>
     </section>
   );

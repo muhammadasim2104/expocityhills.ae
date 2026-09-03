@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Hero from "@/components/Hero";
 import FaqSection from "@/components/FaqSection";
-import RegisterSection from "@/components/RegisterSection";
+import ContactSplit from "@/components/home/ContactSplit";
 import { Breadcrumbs } from "@/components/Sections";
 import { buildings, expoDistricts, getInTouch, project } from "@/lib/data";
 import { getMasterPlanFaqs } from "@/lib/faqs";
@@ -38,15 +38,9 @@ export default function MasterPlanPage() {
         title="Expo City Hills 1 Master Plan"
         subtitle={`Two planned buildings within the ${project.district} district of ${project.masterPlan}.`}
         compact
-        showCanvas={false}
-        primaryCta={{
-          label: "Register Your Interest",
-          href: "#register",
-        }}
-        secondaryCta={{
-          label: "View Expo City Hills brochure",
-          href: "/brochure",
-        }}
+        exploreText="View Expo City Hills brochure"
+        exploreHref="/brochure"
+        image="/assets/expo-hills-district.svg"
       />
       <Breadcrumbs
         items={[
@@ -96,7 +90,7 @@ export default function MasterPlanPage() {
       </section>
 
       <FaqSection faqs={faqs} />
-      <RegisterSection id="register" />
+      <ContactSplit />
     </>
   );
 }
