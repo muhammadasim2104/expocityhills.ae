@@ -1,0 +1,168 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f2f0eb;
+  --foreground: #0d1c14;
+  --forest: #0d1c14;
+  --forest-light: #1a3d2a;
+  --forest-dark: #071009;
+  --sage: #8a9a8e;
+  --cream: #f2f0eb;
+  --cream-dark: #e8e4dc;
+  --accent: #4e9e6a;
+  --accent-light: #d8e8dc;
+  --gold: #4e9e6a;
+  --gold-light: #6bb882;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-forest: var(--forest);
+  --color-forest-light: var(--forest-light);
+  --color-forest-dark: var(--forest-dark);
+  --color-sage: var(--sage);
+  --color-cream: var(--cream);
+  --color-cream-dark: var(--cream-dark);
+  --color-accent: var(--accent);
+  --color-accent-light: var(--accent-light);
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+  --font-sans: var(--font-jost);
+  --font-serif: var(--font-cormorant);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-jost), system-ui, sans-serif;
+}
+
+button:not(:disabled) {
+  cursor: pointer;
+}
+
+.font-serif {
+  font-family: var(--font-cormorant), Georgia, serif;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+.label-caps {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transition: gap 0.25s ease;
+}
+
+.link-arrow:hover {
+  gap: 0.75rem;
+}
+
+.btn-editorial {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.75rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+.btn-editorial-primary {
+  background: var(--accent);
+  color: white;
+}
+
+.btn-editorial-primary:hover {
+  background: var(--forest-light);
+}
+
+.btn-editorial-outline {
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--foreground) 25%, transparent);
+  color: var(--foreground);
+}
+
+.btn-editorial-outline:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.btn-editorial-bordered {
+  background: var(--forest);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  color: white;
+}
+
+.btn-editorial-bordered:hover {
+  background: var(--forest-light);
+}
+
+.btn-editorial-sm {
+  min-height: 2.25rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.625rem;
+}
+
+.hero-canvas-bg {
+  background: linear-gradient(135deg, #0d1c14 0%, #1a3d2a 50%, #0d1c14 100%);
+}
+
+.tile-gradient-pool {
+  background: linear-gradient(160deg, #1a3d2a 0%, #2d6042 100%);
+}
+
+.tile-gradient-green {
+  background: linear-gradient(160deg, #234d35 0%, #4e9e6a 100%);
+}
+
+.tile-gradient-tracks {
+  background: linear-gradient(160deg, #0d1c14 0%, #3a7a52 100%);
+}
+
+.tile-gradient-eco {
+  background: linear-gradient(160deg, #122318 0%, #4e9e6a 60%, #0d1c14 100%);
+}
+
+.gallery-scroll {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.gallery-scroll::-webkit-scrollbar {
+  display: none;
+}
