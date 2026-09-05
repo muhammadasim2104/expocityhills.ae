@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { Cormorant, Jost } from "next/font/google";
+import { Cormorant, DM_Sans } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import RegisterModalProvider from "@/components/RegisterModalProvider";
 import FloatingRegisterButton from "@/components/FloatingRegisterButton";
+import { viewport } from "@/lib/metadata";
 import "./globals.css";
 
 const cormorant = Cormorant({
@@ -13,11 +14,13 @@ const cormorant = Cormorant({
   variable: "--font-cormorant",
 });
 
-const jost = Jost({
+const dmSans = DM_Sans({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-  variable: "--font-jost",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-dm-sans",
 });
+
+export { viewport };
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://expocityhills.ae"),
@@ -25,7 +28,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${cormorant.variable} ${jost.variable}`}>
+    <html lang="en" className={`${cormorant.variable} ${dmSans.variable}`}>
       <body className="flex min-h-screen flex-col antialiased">
         <RegisterModalProvider>
           <Header />

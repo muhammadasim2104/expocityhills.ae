@@ -1,5 +1,5 @@
-import { type Metadata } from "next";
-import { siteConfig, project } from "./data";
+import { type Metadata, type Viewport } from "next";
+import { ogImage, ogImageVersion, project, siteConfig } from "./data";
 
 type PageSEO = {
   title: string;
@@ -14,8 +14,8 @@ export function createMetadata({
   path = "",
   image,
 }: PageSEO): Metadata {
-  const url = `${siteConfig.domain}${path}`;
-  const ogImage = image ?? `${siteConfig.domain}/og-image.svg`;
+  const url = `${siteConfig.domain}${path || "/"}`;
+  const og = image ?? `${siteConfig.domain}${ogImage}?v=${ogImageVersion}`;
 
   return {
     title,
@@ -24,13 +24,20 @@ export function createMetadata({
     alternates: { canonical: url },
     icons: {
       icon: [
-        { url: "/favicon.svg", type: "image/svg+xml" },
         { url: "/favicon.ico", sizes: "any" },
+        { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+        { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+        { url: "/android-chrome-192x192.png", sizes: "192x192", type: "image/png" },
       ],
-      apple: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+      apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+      shortcut: "/favicon.ico",
     },
     manifest: "/site.webmanifest",
-    themeColor: "#0D1C14",
+    appleWebApp: {
+      capable: true,
+      title: siteConfig.name,
+      statusBarStyle: "default",
+    },
     openGraph: {
       title,
       description,
@@ -38,17 +45,30 @@ export function createMetadata({
       siteName: siteConfig.name,
       locale: "en_AE",
       type: "website",
-      images: [{ url: ogImage, width: 1200, height: 630, alt: title }],
+      images: [{ url: og, width: 1200, height: 630, alt: title }],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [ogImage],
+      images: [og],
     },
-    robots: { index: true, follow: true },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
   };
 }
+
+export const viewport: Viewport = {
+  themeColor: "#f7f3ec",
+};
 
 export function createFaqJsonLd(faqs: { question: string; answer: string }[]) {
   return {
@@ -84,6 +104,10 @@ export function createRealEstateListingJsonLd(name?: string) {
     name: name ?? project.name,
     description: siteConfig.description,
     url: siteConfig.domain,
+    provider: {
+      "@type": "Organization",
+      name: project.developer,
+    },
     address: {
       "@type": "PostalAddress",
       streetAddress: project.location,
@@ -103,8 +127,9 @@ export function createOrganizationJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: project.developer,
-    description: `Developer of ${project.name} in ${project.district}, ${project.masterPlan}. Informational reference only.`,
+    name: siteConfig.name,
+    url: siteConfig.domain,
+    description: siteConfig.description,
   };
 }
 
@@ -136,6 +161,22 @@ export function createPlaceJsonLd() {
       addressRegion: "Dubai",
       addressCountry: "AE",
     },
+  };
+}
+
+export function createImageObjectJsonLd({
+  src,
+  alt,
+}: {
+  src: string;
+  alt: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ImageObject",
+    contentUrl: `${siteConfig.domain}${src}`,
+    name: alt,
+    description: alt,
   };
 }
 

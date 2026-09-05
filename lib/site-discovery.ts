@@ -1,6 +1,7 @@
 import { type MetadataRoute } from "next";
 import {
   buildings,
+  contentImages,
   siteConfig,
   SUBPAGE_SLUGS,
   footerLinks,
@@ -27,11 +28,14 @@ export function getAllSitePaths(): string[] {
 }
 
 export function getSitemapEntries(): MetadataRoute.Sitemap {
+  const imageUrls = contentImages.map((src) => `${siteConfig.domain}${src}`);
+
   return getAllSitePaths().map((path) => ({
     url: `${siteConfig.domain}${path}`,
     lastModified: new Date(),
-    changeFrequency: path === "/" ? "weekly" : "monthly",
+    changeFrequency: path === "/" ? ("weekly" as const) : ("monthly" as const),
     priority: path === "/" ? 1 : path.split("/").length <= 2 ? 0.8 : 0.6,
+    ...(path === "/" ? { images: imageUrls } : {}),
   }));
 }
 
@@ -54,10 +58,7 @@ export function getLlmsTxt(): string {
     "## Buildings",
     ...buildings.flatMap((b) => [
       `- ${b.name}: ${siteConfig.domain}/${b.slug}`,
-      ...SUBPAGE_SLUGS.map(
-        (s) =>
-          `  - ${s}: ${siteConfig.domain}/${b.slug}/${s}`,
-      ),
+      ...SUBPAGE_SLUGS.map((s) => `  - ${s}: ${siteConfig.domain}/${b.slug}/${s}`),
     ]),
     "",
     "## Discovery Files",

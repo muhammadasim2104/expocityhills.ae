@@ -1,22 +1,29 @@
 export const siteConfig = {
   name: "expocityhills.ae",
   domain: "https://expocityhills.ae",
-  title: "Expo City Hills 1 | Pre-Launch Residences — Expo City Dubai",
+  title:
+    "Expo City Hills 1 by Dubai South | Eco-Luxury Residences — Expo Hills, Expo City Dubai",
   description:
-    "Expo City Hills 1 by Dubai South Properties — eco-luxury residences in Expo Hills district, Expo City Dubai. See confirmed facts and get in touch for pricing and updates.",
+    "Expo City Hills 1 — two low-rise eco-luxury buildings (1A & 1B) in the Expo Hills district of Expo City Dubai, by Dubai South Properties. 1, 2 & 3-bed planned residences. Pre-launch. Register now.",
   disclaimer:
     "This website is an independent marketing portal and is not officially affiliated with Dubai South Properties or Expo City Dubai. All content is sourced from expocitydubai.com and publicly available project information for informational purposes. Project details, prices, and timelines are subject to change.",
 };
 
+export const ogImage = "/assets/og-share.webp";
+export const ogImageVersion = "20260905a";
+
 export const getInTouch = {
   short: "Get in touch for current pricing and availability.",
-  long: "Pricing for Expo City Hills 1 is confirmed directly with registered buyers. Get in touch and we'll walk you through current availability for your preferred building and unit type.",
+  long: "Pricing and floor plans for Expo City Hills 1 are confirmed directly with registered buyers. Register below and we will walk you through current availability for your preferred building (1A or 1B) and unit type.",
 };
 
-export const heroImage = "/assets/home-hero.svg";
+export const heroImage = "/assets/hero-aerial.webp";
+export const heroImageAlt =
+  "Expo City Hills 1 aerial view placeholder — eco-luxury low-rise residences in Expo Hills district, Expo City Dubai";
+
 export const locationMap = {
-  src: "/assets/location-map.svg",
-  alt: "Expo City Hills 1 location map — Expo Road and E311 intersection, Expo City Dubai",
+  src: "/assets/location-map.webp",
+  alt: "Expo City Hills 1 location map — Expo Road and E311 intersection, Expo Hills district, Expo City Dubai",
 };
 
 export const project = {
@@ -26,23 +33,54 @@ export const project = {
   district: "Expo Hills",
   masterPlan: "Expo City Dubai",
   location:
-    "Intersection of Expo Road (E77) and Sheikh Mohammed Bin Zayed Road (E311), Expo City Dubai",
+    "Intersection of Expo Road (E77) and Sheikh Mohammed Bin Zayed Road (E311), Expo Hills district, Expo City Dubai",
   status: "Pre-Launch / Planned",
-  milestone: "First trace / DLD milestone: February 2026",
+  milestone: "DLD first trace: February 2026",
   totalUnits: "~864",
   totalUnitsNote:
-    "Estimated total across two sub-buildings (1A and 1B), per publicly available pre-construction estimates — no confirmed per-building split.",
+    "Across 1A and 1B combined — pre-construction estimate, no confirmed per-building split published",
   projectValue: "AED 950,000,000",
   projectValueNote:
-    "Developer-submitted pre-construction estimate (~USD 258.7M) — not a per-unit price signal.",
-  architecture: "Eco-friendly, sustainable, low-rise",
+    "Developer-submitted pre-construction estimate (~USD 258.7M — not a per-unit price signal)",
+  architecture: "Eco-friendly, low-rise, sustainable design",
   geo: {
     latitude: 24.9614,
     longitude: 55.1482,
   },
+  h1: "Expo City Hills 1 — Eco-Luxury Residences in Expo Hills, Expo City Dubai",
+  subheading: "Dubai South Properties · Expo Hills District · Expo City Dubai",
   tagline:
     "Low-rise eco-luxury residences in Expo Hills — tranquil living with open spaces and skyline views.",
 };
+
+export const heroPills = [
+  { value: "~864 Homes", label: "Across 1A & 1B" },
+  { value: "1, 2 & 3-Bed", label: "Planned unit types" },
+  { value: "Pre-Launch", label: "DLD trace Feb 2026" },
+  { value: "Eco-Luxury", label: "Low-Rise Design" },
+];
+
+export const stats = heroPills;
+
+export const whatWeKnowIntro =
+  "Expo City Hills 1 is a pre-launch residential development by Dubai South Properties — two low-rise buildings (1A and 1B) planned for the Expo Hills district of Expo City Dubai, at the intersection of Expo Road (E77) and Sheikh Mohammed Bin Zayed Road (E311). The development is estimated at approximately 864 homes across 1A and 1B, with a submitted project value of AED 950 million. Pricing, payment plan, and handover dates have not been publicly released — they are confirmed directly with registered buyers. The project's DLD first trace was recorded in February 2026.";
+
+export const confirmedFactsRows: [string, string][] = [
+  ["Project name", project.name],
+  ["Developer", project.developer],
+  ["Project entity", project.entity],
+  ["Location", project.location],
+  ["Sub-buildings", "1A and 1B"],
+  ["Estimated total homes", `~864 (${project.totalUnitsNote})`],
+  ["Project value (submitted)", `${project.projectValue} (${project.projectValueNote})`],
+  ["Architecture", project.architecture],
+  ["Unit types planned", "1, 2, and 3-bedroom residences (pre-launch marketing categories — DLD-confirmed unit-type breakdown not yet published)"],
+  ["Status", project.status],
+  ["DLD first trace", "February 2026"],
+  ["Pricing", getInTouch.short],
+  ["Payment plan", getInTouch.short],
+  ["Handover", getInTouch.short],
+];
 
 export const buildings = [
   {
@@ -50,157 +88,95 @@ export const buildings = [
     name: "Expo City Hills 1A",
     shortName: "1A",
     status: "Pre-Launch / Planned",
-    image: "/assets/building-1a.svg",
-    imageAlt: "Expo City Hills 1A architectural concept render, Expo City Dubai",
+    image: "/assets/building-1a.webp",
+    cardImage: "/assets/building-1a.webp",
+    cardAlt:
+      "Expo City Hills 1A exterior placeholder render, Expo Hills district, Expo City Dubai",
+    imageAlt:
+      "Expo City Hills 1A exterior placeholder render, Expo Hills district, Expo City Dubai",
+    tagline: "Part of Expo City Hills 1 (~864 homes est.)",
     description:
-      "Expo City Hills 1A is one of two planned low-rise buildings within the Expo City Hills 1 development. Detailed per-building unit counts and specifications have not been published separately.",
-    overviewImage: "/assets/building-1a.svg",
+      "Expo City Hills 1A is one of two planned low-rise buildings within the Expo City Hills 1 development. Per-building unit counts have not been published separately.",
+    overviewImage: "/assets/building-1a.webp",
   },
   {
     slug: "expo-city-hills-1b",
     name: "Expo City Hills 1B",
     shortName: "1B",
     status: "Pre-Launch / Planned",
-    image: "/assets/building-1b.svg",
-    imageAlt: "Expo City Hills 1B architectural concept render, Expo City Dubai",
+    image: "/assets/building-1b.webp",
+    cardImage: "/assets/building-1b.webp",
+    cardAlt:
+      "Expo City Hills 1B exterior placeholder render, Expo Hills district, Expo City Dubai",
+    imageAlt:
+      "Expo City Hills 1B exterior placeholder render, Expo Hills district, Expo City Dubai",
+    tagline: "Part of Expo City Hills 1 (~864 homes est.)",
     description:
-      "Expo City Hills 1B is one of two planned low-rise buildings within the Expo City Hills 1 development. Detailed per-building unit counts and specifications have not been published separately.",
-    overviewImage: "/assets/building-1b.svg",
+      "Expo City Hills 1B is one of two planned low-rise buildings within the Expo City Hills 1 development. Per-building unit counts have not been published separately.",
+    overviewImage: "/assets/building-1b.webp",
   },
 ] as const;
 
 export type BuildingSlug = (typeof buildings)[number]["slug"];
 
 export const plannedUnitTypes = [
-  {
-    type: "1-bedroom",
-    label: "1 Bedroom",
-    note: "Planned unit type — detailed sizes not yet published.",
-  },
-  {
-    type: "2-bedroom",
-    label: "2 Bedroom",
-    note: "Planned unit type — detailed sizes not yet published.",
-  },
-  {
-    type: "3-bedroom",
-    label: "3 Bedroom",
-    note: "Planned unit type — detailed sizes not yet published.",
-  },
+  { type: "1-bedroom", label: "1 Bedroom", status: "Planned", size: "Sizes not yet published" },
+  { type: "2-bedroom", label: "2 Bedroom", status: "Planned", size: "Sizes not yet published" },
+  { type: "3-bedroom", label: "3 Bedroom", status: "Planned", size: "Sizes not yet published" },
 ];
 
-export const stats = [
-  { value: "~864", label: "Homes (est.)" },
-  { value: "2", label: "Buildings (1A & 1B)" },
-  { value: "Pre-Launch", label: "Status" },
-];
+export const unitTypesCaveat =
+  "These are pre-launch marketing categories confirmed by Dubai South Properties — not a DLD-confirmed unit-type breakdown. Detailed sizes, per-building availability, and pricing are released directly to registered buyers. Get in touch to be registered.";
 
-export const communityAmenities = [
-  "Leisure Pool",
-  "Jogging Tracks",
-  "Retail Shops",
-  "Green Areas",
-  "Advanced Security",
-  "Eco Architecture",
-  "Children's Play Areas",
-  "Fitness Center",
+export const amenitiesGrouped = [
+  {
+    title: "Wellness",
+    items: ["Leisure pool", "Jogging tracks", "Fitness center"],
+  },
+  {
+    title: "Family & Community",
+    items: ["Children's play areas", "Retail shops", "Green areas"],
+  },
+  {
+    title: "Security & Sustainability",
+    items: ["24/7 advanced security", "Eco architecture"],
+  },
 ];
-
-export const amenities = communityAmenities.map((title) => ({
-  title,
-  description:
-    title === "Leisure Pool"
-      ? "Resort-style swimming pool surrounded by landscaped terraces."
-      : title === "Jogging Tracks"
-        ? "Dedicated running and walking paths through green areas."
-        : title === "Retail Shops"
-          ? "Ground-level retail for daily essentials and services."
-          : title === "Green Areas"
-            ? "Landscaped gardens and open community spaces."
-            : title === "Advanced Security"
-              ? "24/7 gated access, CCTV surveillance, and controlled entry."
-              : title === "Eco Architecture"
-                ? "Sustainable materials, energy-efficient systems, biophilic design."
-                : title === "Children's Play Areas"
-                  ? "Dedicated play spaces for families within the community."
-                  : "On-site fitness facilities for residents.",
-}));
 
 export const lifestyleTiles = [
   {
-    title: "Leisure Pool",
+    label: "Leisure Pool",
     slug: "leisure-pool",
-    image: "/assets/lifestyle-pool.svg",
-    alt: "Expo City Hills leisure pool amenity concept, Expo City Dubai",
+    image: "/assets/lifestyle-pool.webp",
+    alt: "Expo City Hills 1 leisure pool amenity, Expo Hills district, Expo City Dubai",
   },
   {
-    title: "Green Areas",
+    label: "Green Areas",
     slug: "green-areas",
-    image: "/assets/lifestyle-green.svg",
-    alt: "Expo City Hills green areas and landscaped gardens, Expo Hills district",
+    image: "/assets/lifestyle-green.webp",
+    alt: "Expo City Hills 1 green areas and open spaces, Expo Hills district, Expo City Dubai",
   },
   {
-    title: "Jogging Tracks",
+    label: "Jogging Tracks",
     slug: "jogging-tracks",
-    image: "/assets/lifestyle-tracks.svg",
-    alt: "Expo City Hills jogging tracks through open spaces, Expo City Dubai",
+    image: "/assets/lifestyle-tracks.webp",
+    alt: "Expo City Hills 1 jogging tracks through green space, Expo City Dubai",
   },
   {
-    title: "Eco Architecture",
+    label: "Eco Architecture",
     slug: "eco-architecture",
-    image: "/assets/lifestyle-eco.svg",
-    alt: "Expo City Hills eco-friendly low-rise architecture concept",
+    image: "/assets/lifestyle-eco.webp",
+    alt: "Expo City Hills 1 eco-friendly low-rise architecture, Expo Hills district, Expo City Dubai",
   },
 ];
 
-export const galleryImages = [
-  {
-    src: "/assets/gallery-1.svg",
-    alt: "Expo City Hills 1 low-rise building concept, Expo Hills district",
-  },
-  {
-    src: "/assets/gallery-2.svg",
-    alt: "Expo City Hills master plan geometry — two-building layout concept",
-  },
-  {
-    src: "/assets/gallery-3.svg",
-    alt: "Expo City Hills leisure pool and green terrace concept",
-  },
-  {
-    src: "/assets/gallery-4.svg",
-    alt: "Expo City Hills eco architecture and skyline views concept",
-  },
-  {
-    src: "/assets/building-1a.svg",
-    alt: "Expo City Hills 1A exterior architectural concept render",
-  },
-  {
-    src: "/assets/building-1b.svg",
-    alt: "Expo City Hills 1B exterior architectural concept render",
-  },
-];
-
-export const locationDistancesPrimary = [
-  { destination: "Expo City Dubai (core district)", distance: "1.0 km" },
+export const locationDistances = [
   { destination: "Al Forsan Park", distance: "0.7 km" },
-  { destination: "International Schools", distance: "3.3 km" },
-  { destination: "Golf Courses", distance: "Nearby" },
-  {
-    destination: "Sheikh Mohammed Bin Zayed Road (E311)",
-    distance: "Direct Access",
-  },
+  { destination: "Expo City Dubai core", distance: "1.0 km" },
+  { destination: "International schools", distance: "3.3 km" },
+  { destination: "Al Maktoum International Airport", distance: "~10 minutes" },
+  { destination: "Sheikh Mohammed Bin Zayed Road (E311)", distance: "Direct access" },
 ];
-
-export const locationDistancesSecondary = [
-  {
-    destination: "Al Maktoum International Airport",
-    distance: "~10 minutes",
-    note: "Secondary reference — less precise than primary distance figures.",
-  },
-];
-
-export const locationNote =
-  "Expo City Hills 1 — intersection of Expo Road (E77) and Sheikh Mohammed Bin Zayed Road (E311), Expo Hills district";
 
 export const expoDistricts = [
   "Expo Downtown",
@@ -210,43 +186,15 @@ export const expoDistricts = [
   "Expo Fields",
 ];
 
-export const communityColumns = [
-  {
-    title: "Wellness",
-    subtitle: "Pool, tracks, and fitness",
-    items: ["Leisure pool", "Jogging tracks", "Fitness center"],
-  },
-  {
-    title: "Family",
-    subtitle: "Play and daily convenience",
-    items: ["Children's play areas", "Retail shops"],
-  },
-  {
-    title: "Security & Sustainability",
-    subtitle: "Gated eco-luxury living",
-    items: ["24/7 advanced security", "Eco architecture"],
-  },
-];
-
 export const aboutDeveloper = {
-  label: "About the Developer",
-  brand: "Dubai South",
-  title: "Expo City Hills by Dubai South Properties",
-  intro:
-    "Dubai South Properties is developing Expo City Hills 1 — low-rise eco-luxury residences within the Expo Hills district of Expo City Dubai.",
+  title: "Expo City Hills 1 by Dubai South Properties",
   paragraphs: [
-    "The project entity is registered as Expo City Hills, with an estimated 864 homes planned across two sub-buildings (1A and 1B) at the intersection of Expo Road (E77) and Sheikh Mohammed Bin Zayed Road (E311).",
-    "Expo City Dubai's master plan comprises five official districts — Expo Downtown, Expo Business, Expo Hills, Expo Valley, and Expo Fields. Expo Hills is positioned as tranquil living with open spaces and skyline views.",
+    "Dubai South Properties is developing Expo City Hills 1 — low-rise eco-luxury residences within the Expo Hills district of Expo City Dubai. The project entity is registered as Expo City Hills, with an estimated 864 homes planned across two sub-buildings (1A and 1B).",
+    "Dubai South is the master developer behind Dubai South, the 145 sq km planned city adjacent to Al Maktoum International Airport — designed for up to one million residents and expected to generate over 25% of Dubai's GDP by 2030. Expo City sits within the Dubai South development zone, making Dubai South Properties the sovereign master developer for this location.",
   ],
-  image: "/assets/expo-hills-district.svg",
+  image: "/assets/expo-hills-district.webp",
   imageAlt:
-    "Expo Hills district within Expo City Dubai master plan — open spaces and skyline views",
-};
-
-export const philosophy = {
-  label: "Expo City Hills 1",
-  title: "Eco-Luxury.\nOpen Spaces.\nExpo Hills Living.",
-  body: "Expo City Hills 1 is a pre-launch residential development comprising two buildings (1A and 1B) with an estimated 864 homes at the intersection of Expo Road (E77) and Sheikh Mohammed Bin Zayed Road (E311). Pricing, payment plan, and handover details are confirmed directly with registered buyers.",
+    "Expo Hills district within Expo City Dubai — tranquil living with open spaces and skyline views",
 };
 
 export const navLinks = [
@@ -280,6 +228,8 @@ export const SUBPAGE_LABELS: Record<SubpageSlug, string> = {
   "price-list": "Price List",
 };
 
+export const defaultCrumbs = [{ name: "Home", path: "/" }];
+
 export function getBuildingBySlug(slug: string) {
   return buildings.find((b) => b.slug === slug);
 }
@@ -305,3 +255,17 @@ export function getProjectResourceLinks() {
     href: `/${sub}`,
   }));
 }
+
+export const contentImages = [
+  heroImage,
+  ...buildings.map((b) => b.image),
+  ...lifestyleTiles.map((t) => t.image),
+  locationMap.src,
+  "/assets/gallery-1.webp",
+  "/assets/gallery-2.webp",
+  "/assets/gallery-3.webp",
+  "/assets/gallery-4.webp",
+  "/assets/interior-living.webp",
+  "/assets/interior-kitchen.webp",
+  ogImage,
+];

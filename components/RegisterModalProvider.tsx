@@ -29,7 +29,7 @@ export function useRegisterModal() {
 }
 
 const INPUT =
-  "mt-2 w-full rounded-lg border border-white/10 bg-[#122318] px-4 py-3.5 text-sm text-white placeholder:text-white/30 focus:border-accent/50 focus:outline-none focus:ring-1 focus:ring-accent/30";
+  "mt-2 w-full rounded-lg border border-forest/15 bg-cream px-4 py-3.5 text-sm text-foreground placeholder:text-foreground/30 focus:border-gold/50 focus:outline-none focus:ring-1 focus:ring-gold/30";
 
 export default function RegisterModalProvider({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
@@ -54,6 +54,15 @@ export default function RegisterModalProvider({ children }: { children: ReactNod
     };
   }, [open]);
 
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeRegister();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open, closeRegister]);
+
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setSubmitted(true);
@@ -66,7 +75,7 @@ export default function RegisterModalProvider({ children }: { children: ReactNod
         <div className="fixed inset-0 z-[100] flex items-end justify-center sm:items-center">
           <button
             type="button"
-            className="absolute inset-0 bg-forest-dark/80 backdrop-blur-sm"
+            className="absolute inset-0 bg-forest-dark/50 backdrop-blur-sm"
             onClick={closeRegister}
             aria-label="Close registration form"
           />
@@ -74,68 +83,73 @@ export default function RegisterModalProvider({ children }: { children: ReactNod
             role="dialog"
             aria-modal="true"
             aria-labelledby="register-title"
-            className="relative z-10 w-full max-w-lg border border-white/10 bg-forest-dark p-6 shadow-2xl sm:rounded-2xl sm:p-8"
+            className="relative z-10 w-full max-w-lg overflow-hidden rounded-2xl bg-background shadow-2xl sm:mx-4"
           >
             <button
               type="button"
               onClick={closeRegister}
-              className="absolute right-4 top-4 text-white/50 hover:text-white"
+              className="absolute right-4 top-4 z-10 flex h-9 w-9 items-center justify-center rounded-full border border-forest/15 text-foreground/70 hover:text-forest"
               aria-label="Close"
             >
               ✕
             </button>
-            {submitted ? (
-              <div className="py-8 text-center">
-                <p className="font-serif text-2xl text-white">Thank You</p>
-                <p className="mt-3 text-sm text-white/60">
-                  Your interest in Expo City Hills 1
-                  {options.building ? ` (${options.building})` : ""} has been
-                  received. We will contact you with pre-launch updates.
-                </p>
-                <button
-                  type="button"
-                  onClick={closeRegister}
-                  className="btn-editorial btn-editorial-primary mt-8"
-                >
-                  Close
-                </button>
-              </div>
-            ) : (
-              <>
-                <p className="label-caps text-accent">Register Your Interest</p>
-                <h2 id="register-title" className="mt-3 font-serif text-2xl text-white">
-                  {options.building
-                    ? `Register for ${options.building}`
-                    : "Expo City Hills 1"}
-                </h2>
-                <p className="mt-2 text-sm text-white/60">
-                  Share your details for pricing, floor plans, and launch updates.
-                </p>
-                <form onSubmit={handleSubmit} className="mt-6 space-y-4">
-                  <div>
-                    <label htmlFor="modal-name" className="label-caps text-sage">
-                      Full Name
-                    </label>
-                    <input id="modal-name" name="fullName" required autoComplete="name" className={INPUT} />
-                  </div>
-                  <div>
-                    <label htmlFor="modal-email" className="label-caps text-sage">
-                      Email
-                    </label>
-                    <input id="modal-email" name="email" type="email" required autoComplete="email" className={INPUT} />
-                  </div>
-                  <div>
-                    <label htmlFor="modal-phone" className="label-caps text-sage">
-                      Phone
-                    </label>
-                    <input id="modal-phone" name="phone" type="tel" required autoComplete="tel" className={INPUT} />
-                  </div>
-                  <button type="submit" className="btn-editorial btn-editorial-primary w-full">
-                    {options.submitLabel ?? "Register Your Interest"}
+            <div className="px-6 py-8 sm:px-8 sm:py-10">
+              {submitted ? (
+                <div className="py-4 text-center">
+                  <p className="font-serif text-2xl font-light text-forest">Thank you</p>
+                  <p className="mt-4 text-sm leading-relaxed text-foreground/65">
+                    Your Expo City Hills 1 expert will be in touch with all the details.
+                  </p>
+                  <button type="button" onClick={closeRegister} className="btn-editorial btn-editorial-primary mt-8 w-full">
+                    Close
                   </button>
-                </form>
-              </>
-            )}
+                </div>
+              ) : (
+                <>
+                  <p className="label-caps text-gold">Register Your Interest</p>
+                  <h2 id="register-title" className="mt-4 font-serif text-2xl font-light text-forest">
+                    {options.building ? `Register for ${options.building}` : "Expo City Hills 1 Pre-Launch"}
+                  </h2>
+                  <form onSubmit={handleSubmit} className="mt-8 space-y-4" noValidate>
+                    <div className="grid gap-4 sm:grid-cols-2">
+                      <div>
+                        <label htmlFor="modal-first" className="text-sm">First name *</label>
+                        <input id="modal-first" name="firstName" required className={INPUT} />
+                      </div>
+                      <div>
+                        <label htmlFor="modal-last" className="text-sm">Last name *</label>
+                        <input id="modal-last" name="lastName" required className={INPUT} />
+                      </div>
+                    </div>
+                    <div>
+                      <label htmlFor="modal-email" className="text-sm">Email *</label>
+                      <input id="modal-email" name="email" type="email" required className={INPUT} />
+                    </div>
+                    <div>
+                      <label htmlFor="modal-phone" className="text-sm">Phone / WhatsApp *</label>
+                      <input id="modal-phone" name="phone" type="tel" required className={INPUT} />
+                    </div>
+                    <div>
+                      <label htmlFor="modal-unit" className="text-sm">Preferred unit type</label>
+                      <select id="modal-unit" name="unitType" className={INPUT} defaultValue="">
+                        <option value="" disabled>Select</option>
+                        <option value="1-bedroom">1-Bedroom</option>
+                        <option value="2-bedroom">2-Bedroom</option>
+                        <option value="3-bedroom">3-Bedroom</option>
+                        <option value="not-decided">Not decided</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label htmlFor="modal-msg" className="text-sm">Message (optional)</label>
+                      <textarea id="modal-msg" name="message" rows={3} className={INPUT} />
+                    </div>
+                    <button type="submit" className="btn-editorial btn-editorial-primary w-full">
+                      {options.submitLabel ?? "Register for Expo City Hills 1"}
+                    </button>
+                  </form>
+                </>
+              )}
+            </div>
           </div>
         </div>
       )}

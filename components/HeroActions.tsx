@@ -13,7 +13,7 @@ export default function HeroActions({
       <RegisterButton className="btn-editorial btn-editorial-bordered">
         Register Your Interest
       </RegisterButton>
-      <Link href={exploreHref} className="btn-editorial btn-editorial-outline border-white/35 text-white hover:border-white hover:text-white">
+      <Link href={exploreHref} className="btn-editorial btn-editorial-bordered">
         {exploreText}
       </Link>
     </div>

@@ -38,7 +38,7 @@ export default function Header() {
         overlay ? "border-transparent bg-transparent" : "border-b border-forest/10 bg-background/95 backdrop-blur-md"
       }`}
     >
-      <div className="relative mx-auto grid max-w-7xl grid-cols-[1fr_auto_1fr] items-center gap-3 px-4 py-4 sm:px-6 lg:gap-4 lg:px-8 lg:py-5">
+      <div className="site-container relative grid grid-cols-[1fr_auto_1fr] items-center gap-3 py-4 lg:gap-4 lg:py-5">
         <Link
           href="/"
           className={`justify-self-start font-serif text-lg font-semibold tracking-wide ${overlay ? "text-white" : "text-forest"}`}
@@ -82,11 +82,11 @@ export default function Header() {
 
       {menuOpen && (
         <div className="border-t border-forest/10 bg-background/98 backdrop-blur-md lg:hidden">
-          <nav className="mx-auto max-w-7xl px-4 py-6 sm:px-6">
+          <nav className="site-container py-6" aria-label="Mobile">
             <ul className="flex flex-col gap-5">
               {navLinks.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="label-caps text-foreground/70 hover:text-accent">
+                  <Link href={link.href} className="label-caps text-foreground/70 hover:text-forest">
                     {link.label}
                   </Link>
                 </li>
