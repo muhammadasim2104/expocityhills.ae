@@ -19,9 +19,9 @@ export default function SiteLogo({
     <Image
       src={src}
       alt="Expo City Hills"
-      width={131}
-      height={62}
-      className={`h-9 w-auto shrink-0 sm:h-10 ${className}`}
+      width={263}
+      height={124}
+      className={`h-12 w-auto shrink-0 sm:h-14 ${className}`}
       priority
     />
   );
