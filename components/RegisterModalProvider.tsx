@@ -5,10 +5,12 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useRef,
   useState,
   type ReactNode,
 } from "react";
 import RegistrationForm from "@/components/RegistrationForm";
+import { shouldSuppressOverlayDismiss } from "@/lib/phone-country-select-guard";
 
 type RegisterOptions = {
   building?: string;
@@ -31,6 +33,7 @@ export function useRegisterModal() {
 export default function RegisterModalProvider({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
   const [options, setOptions] = useState<RegisterOptions>({});
+  const backdropPressedRef = useRef(false);
 
   const openRegister = useCallback((opts?: RegisterOptions) => {
     setOptions(opts ?? {});
@@ -62,18 +65,38 @@ export default function RegisterModalProvider({ children }: { children: ReactNod
     <RegisterContext.Provider value={{ openRegister, closeRegister }}>
       {children}
       {open && (
-        <div className="fixed inset-0 z-[100] flex items-end justify-center sm:items-center">
-          <button
-            type="button"
-            className="absolute inset-0 bg-forest-dark/50 backdrop-blur-sm"
-            onClick={closeRegister}
-            aria-label="Close registration form"
-          />
+        <div
+          className="fixed inset-0 z-[100] flex items-end justify-center sm:items-center"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="register-title"
+          onMouseDown={(event) => {
+            if (shouldSuppressOverlayDismiss()) {
+              backdropPressedRef.current = false;
+              return;
+            }
+            backdropPressedRef.current = event.target === event.currentTarget;
+          }}
+          onPointerDown={() => {
+            if (shouldSuppressOverlayDismiss()) {
+              backdropPressedRef.current = false;
+            }
+          }}
+          onClick={(event) => {
+            if (
+              backdropPressedRef.current &&
+              event.target === event.currentTarget &&
+              !shouldSuppressOverlayDismiss()
+            ) {
+              closeRegister();
+            }
+            backdropPressedRef.current = false;
+          }}
+        >
           <div
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="register-title"
-            className="relative z-10 w-full max-w-lg overflow-hidden rounded-2xl bg-background shadow-2xl sm:mx-4"
+            className="relative z-10 w-full max-w-lg overflow-y-auto rounded-2xl bg-background shadow-2xl sm:mx-4"
+            onMouseDown={(event) => event.stopPropagation()}
+            onClick={(event) => event.stopPropagation()}
           >
             <button
               type="button"

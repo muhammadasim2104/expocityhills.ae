@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import PhoneField from "@/components/PhoneField";
+import { useVisitorPhoneCountry } from "@/hooks/use-visitor-phone-country";
 import {
   getSourcePageForSubmit,
   getTrafficChannelForSubmit,
@@ -40,10 +41,11 @@ export default function RegistrationForm({
 }: RegistrationFormProps) {
   const formRef = useRef<HTMLFormElement>(null);
   const project = resolveProject({ projectName });
+  const defaultCountry = useVisitorPhoneCountry();
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [phone, setPhone] = useState("");
+  const [phone, setPhone] = useState<string | undefined>("");
 
   const getFieldValues = () => {
     const form = formRef.current;
@@ -51,7 +53,7 @@ export default function RegistrationForm({
     return {
       full_name: String(formData?.get("name") ?? "").trim(),
       email: String(formData?.get("email") ?? "").trim(),
-      phone: phone.trim(),
+      phone: (phone ?? "").trim(),
     };
   };
 
@@ -86,7 +88,7 @@ export default function RegistrationForm({
 
     const form = e.currentTarget;
     const formData = new FormData(form);
-    const phoneValue = phone.trim();
+    const phoneValue = (phone ?? "").trim();
     const fieldHints = captureFieldHints();
 
     if (phoneValue.replace(/\D/g, "").length < 8) {
@@ -205,6 +207,7 @@ export default function RegistrationForm({
           id={`${idPrefix}-phone`}
           name="phone"
           value={phone}
+          defaultCountry={defaultCountry}
           onChange={(next) => {
             setPhone(next);
             notifyFieldChange();
