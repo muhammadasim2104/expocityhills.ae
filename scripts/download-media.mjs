@@ -1,8 +1,8 @@
 /**
- * Downloads placeholder photography and generates og-share.webp + favicons.
- * TODO: Replace building renders with official Dubai South Properties assets when released.
+ * Downloads Expo Hills imagery from expocitydubai.com (Contentful CDN).
+ * Source page: https://www.expocitydubai.com/en/expo-living/expo-hills/
  */
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir } from "node:fs/promises";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import sharp from "sharp";
@@ -10,31 +10,41 @@ import sharp from "sharp";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const assetsDir = join(__dirname, "../public/assets");
 
-/** Pexels — license-free placeholders until official renders are available. */
+const CTF = "https://images.ctfassets.net/r2cfrvo3y08m";
+
+/** High-res variants from the official Expo Hills district page. */
+const sources = {
+  hills1: `${CTF}/2p0WEQIAyJVeCYPkanV8xi/158af94554257503449ab51a8cd5b2d0/Expo_Hills_1.png?w=1920`,
+  hills2: `${CTF}/CkogtE0DhuPp1MwVHizVV/16796443578ff984d671d461daabf6bd/Expo_Hills_2.png?w=1920`,
+  hills3: `${CTF}/4pWdLzoH0cGYO0gknQQveI/7be9bc346bce472b35cc5f3acf837245/Expo_Hills_3.png?w=1920`,
+  hills4: `${CTF}/Ed05UxF4AHKyxmztyfwD9/f1789042f429472f2a571cec96a03208/Expo_Hills_4.png?w=1920`,
+  unstudio: `${CTF}/ThTG25Et1xVcMRVp26klj/a674f106f9ec0e1f6033252cfacc3ac0/240821_ECD_01_DMP_Visual_Expo_Hills_UNStudio.jpg?w=1920`,
+  districtsMap: `${CTF}/5uwFqX7TrsnxFZimlv1mBt/21ff447aa56b39d7869bd798eaab761e/Expo_City_Dubai_Districts___Real_Estate.jpg?w=2400`,
+};
+
 const assets = [
-  { file: "hero-aerial.webp", url: "https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=2400" },
-  { file: "lifestyle-pool.webp", url: "https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg?auto=compress&cs=tinysrgb&w=1600" },
-  { file: "lifestyle-green.webp", url: "https://images.pexels.com/photos/1105766/pexels-photo-1105766.jpeg?auto=compress&cs=tinysrgb&w=1600" },
-  { file: "lifestyle-tracks.webp", url: "https://images.pexels.com/photos/3775163/pexels-photo-3775163.jpeg?auto=compress&cs=tinysrgb&w=1600" },
-  { file: "lifestyle-eco.webp", url: "https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1600" },
-  // TODO — replace with official Dubai South Properties render when released
-  { file: "building-1a.webp", url: "https://images.pexels.com/photos/323705/pexels-photo-323705.jpeg?auto=compress&cs=tinysrgb&w=1600" },
-  { file: "building-1b.webp", url: "https://images.pexels.com/photos/1396132/pexels-photo-1396132.jpeg?auto=compress&cs=tinysrgb&w=1600" },
-  { file: "gallery-1.webp", url: "https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=1600" },
-  { file: "gallery-2.webp", url: "https://images.pexels.com/photos/323775/pexels-photo-323775.jpeg?auto=compress&cs=tinysrgb&w=1600" },
-  { file: "gallery-3.webp", url: "https://images.pexels.com/photos/2102587/pexels-photo-2102587.jpeg?auto=compress&cs=tinysrgb&w=1600" },
-  { file: "gallery-4.webp", url: "https://images.pexels.com/photos/323775/pexels-photo-323775.jpeg?auto=compress&cs=tinysrgb&w=1600" },
-  { file: "interior-living.webp", url: "https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1600" },
-  { file: "interior-kitchen.webp", url: "https://images.pexels.com/photos/2062431/pexels-photo-2062431.jpeg?auto=compress&cs=tinysrgb&w=1600" },
-  { file: "location-map.webp", url: "https://images.pexels.com/photos/1482803/pexels-photo-1482803.jpeg?auto=compress&cs=tinysrgb&w=1920" },
-  { file: "expo-hills-district.webp", url: "https://images.pexels.com/photos/1105766/pexels-photo-1105766.jpeg?auto=compress&cs=tinysrgb&w=1920" },
+  { file: "hero-aerial.webp", url: sources.unstudio },
+  { file: "building-1a.webp", url: sources.hills1 },
+  { file: "building-1b.webp", url: sources.hills2 },
+  { file: "lifestyle-pool.webp", url: sources.hills3 },
+  { file: "lifestyle-green.webp", url: sources.hills4 },
+  { file: "lifestyle-tracks.webp", url: sources.hills2 },
+  { file: "lifestyle-eco.webp", url: sources.hills1 },
+  { file: "gallery-1.webp", url: sources.hills1 },
+  { file: "gallery-2.webp", url: sources.hills2 },
+  { file: "gallery-3.webp", url: sources.hills3 },
+  { file: "gallery-4.webp", url: sources.hills4 },
+  { file: "interior-living.webp", url: sources.hills3 },
+  { file: "interior-kitchen.webp", url: sources.hills4 },
+  { file: "location-map.webp", url: sources.districtsMap },
+  { file: "expo-hills-district.webp", url: sources.unstudio },
 ];
 
 async function downloadWebp(url, dest) {
   const res = await fetch(url);
   if (!res.ok) throw new Error(`Failed ${url}: ${res.status}`);
   const buf = Buffer.from(await res.arrayBuffer());
-  await sharp(buf).webp({ quality: 85 }).toFile(dest);
+  await sharp(buf).webp({ quality: 88 }).toFile(dest);
   console.log(`✓ ${dest.split("/").pop()}`);
 }
 

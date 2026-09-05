@@ -10,7 +10,7 @@ export const siteConfig = {
 };
 
 export const ogImage = "/assets/og-share.webp";
-export const ogImageVersion = "20260905a";
+export const ogImageVersion = "20260906a";
 
 export const getInTouch = {
   short: "Get in touch for current pricing and availability.",
@@ -19,11 +19,11 @@ export const getInTouch = {
 
 export const heroImage = "/assets/hero-aerial.webp";
 export const heroImageAlt =
-  "Expo City Hills 1 aerial view placeholder — eco-luxury low-rise residences in Expo Hills district, Expo City Dubai";
+  "Expo Hills district master plan visual, Expo City Dubai — tranquil living with open spaces and skyline views";
 
 export const locationMap = {
   src: "/assets/location-map.webp",
-  alt: "Expo City Hills 1 location map — Expo Road and E311 intersection, Expo Hills district, Expo City Dubai",
+  alt: "Expo City Dubai districts map — Expo Hills location, Expo City Dubai",
 };
 
 export const project = {
@@ -90,10 +90,8 @@ export const buildings = [
     status: "Pre-Launch / Planned",
     image: "/assets/building-1a.webp",
     cardImage: "/assets/building-1a.webp",
-    cardAlt:
-      "Expo City Hills 1A exterior placeholder render, Expo Hills district, Expo City Dubai",
-    imageAlt:
-      "Expo City Hills 1A exterior placeholder render, Expo Hills district, Expo City Dubai",
+    cardAlt: "Expo Hills district render 1, Expo City Dubai",
+    imageAlt: "Expo Hills district render 1, Expo City Dubai",
     tagline: "Part of Expo City Hills 1 (~864 homes est.)",
     description:
       "Expo City Hills 1A is one of two planned low-rise buildings within the Expo City Hills 1 development. Per-building unit counts have not been published separately.",
@@ -106,10 +104,8 @@ export const buildings = [
     status: "Pre-Launch / Planned",
     image: "/assets/building-1b.webp",
     cardImage: "/assets/building-1b.webp",
-    cardAlt:
-      "Expo City Hills 1B exterior placeholder render, Expo Hills district, Expo City Dubai",
-    imageAlt:
-      "Expo City Hills 1B exterior placeholder render, Expo Hills district, Expo City Dubai",
+    cardAlt: "Expo Hills district render 2, Expo City Dubai",
+    imageAlt: "Expo Hills district render 2, Expo City Dubai",
     tagline: "Part of Expo City Hills 1 (~864 homes est.)",
     description:
       "Expo City Hills 1B is one of two planned low-rise buildings within the Expo City Hills 1 development. Per-building unit counts have not been published separately.",
@@ -148,25 +144,25 @@ export const lifestyleTiles = [
     label: "Leisure Pool",
     slug: "leisure-pool",
     image: "/assets/lifestyle-pool.webp",
-    alt: "Expo City Hills 1 leisure pool amenity, Expo Hills district, Expo City Dubai",
+    alt: "Expo Hills leisure and outdoor amenity areas, Expo City Dubai",
   },
   {
     label: "Green Areas",
     slug: "green-areas",
     image: "/assets/lifestyle-green.webp",
-    alt: "Expo City Hills 1 green areas and open spaces, Expo Hills district, Expo City Dubai",
+    alt: "Expo Hills green areas and open spaces, Expo City Dubai",
   },
   {
     label: "Jogging Tracks",
     slug: "jogging-tracks",
     image: "/assets/lifestyle-tracks.webp",
-    alt: "Expo City Hills 1 jogging tracks through green space, Expo City Dubai",
+    alt: "Expo Hills wadi-style landscape and trails, Expo City Dubai",
   },
   {
     label: "Eco Architecture",
     slug: "eco-architecture",
     image: "/assets/lifestyle-eco.webp",
-    alt: "Expo City Hills 1 eco-friendly low-rise architecture, Expo Hills district, Expo City Dubai",
+    alt: "Expo Hills sustainable low-rise architecture, Expo City Dubai",
   },
 ];
 

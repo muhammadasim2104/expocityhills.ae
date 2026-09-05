@@ -5,79 +5,79 @@ export type GallerySlide = {
   height: number;
 };
 
-/** Exterior — building renders and landscape placeholders. TODO: replace with official renders. */
+/** Expo Hills imagery from expocitydubai.com/en/expo-living/expo-hills/ */
 export const exteriorImages: GallerySlide[] = [
   {
     src: "/assets/building-1a.webp",
-    alt: "Expo City Hills 1A exterior placeholder render, Expo Hills district, Expo City Dubai",
-    width: 1600,
-    height: 1067,
+    alt: "Expo Hills district render 1, Expo City Dubai",
+    width: 1920,
+    height: 1200,
   },
   {
     src: "/assets/building-1b.webp",
-    alt: "Expo City Hills 1B exterior placeholder render, Expo Hills district, Expo City Dubai",
-    width: 1600,
-    height: 1067,
+    alt: "Expo Hills district render 2, Expo City Dubai",
+    width: 1920,
+    height: 1200,
   },
   {
     src: "/assets/gallery-1.webp",
-    alt: "Expo City Hills 1 low-rise residential community exterior, Expo Hills district, Expo City Dubai",
-    width: 1600,
-    height: 1067,
+    alt: "Expo Hills open spaces and skyline views, Expo City Dubai",
+    width: 1920,
+    height: 1200,
   },
   {
     src: "/assets/gallery-2.webp",
-    alt: "Expo City Hills 1 sustainable architecture exterior, Expo City Dubai",
-    width: 1600,
-    height: 1067,
+    alt: "Expo Hills tranquil residential district, Expo City Dubai",
+    width: 1920,
+    height: 1200,
   },
   {
     src: "/assets/gallery-3.webp",
-    alt: "Expo City Hills 1 landscaped exterior with green spaces, Expo Hills district",
-    width: 1600,
-    height: 1067,
+    alt: "Expo Hills green landscape, Expo City Dubai",
+    width: 1920,
+    height: 1200,
   },
   {
     src: "/assets/gallery-4.webp",
-    alt: "Expo City Hills 1 eco-luxury low-rise building exterior, Expo City Dubai",
-    width: 1600,
-    height: 1067,
+    alt: "Expo Hills low-rise living, Expo City Dubai",
+    width: 1920,
+    height: 1200,
   },
 ];
 
 export const interiorImages: GallerySlide[] = [
   {
     src: "/assets/interior-living.webp",
-    alt: "Expo City Hills 1 interior living room placeholder, Expo Hills district, Expo City Dubai",
-    width: 1600,
-    height: 1067,
+    alt: "Expo Hills residential living concept, Expo City Dubai",
+    width: 1920,
+    height: 1200,
   },
   {
     src: "/assets/interior-kitchen.webp",
-    alt: "Expo City Hills 1 interior kitchen placeholder, Expo Hills district, Expo City Dubai",
-    width: 1600,
-    height: 1067,
+    alt: "Expo Hills residential amenity concept, Expo City Dubai",
+    width: 1920,
+    height: 1200,
   },
 ];
 
 export const communityImages: GallerySlide[] = [
   {
     src: "/assets/lifestyle-pool.webp",
-    alt: "Expo City Hills 1 leisure pool amenity, Expo Hills district, Expo City Dubai",
-    width: 1600,
-    height: 1067,
+    alt: "Expo Hills leisure and outdoor amenity areas, Expo City Dubai",
+    width: 1920,
+    height: 1200,
   },
   {
     src: "/assets/lifestyle-green.webp",
-    alt: "Expo City Hills 1 green areas and open spaces, Expo Hills district, Expo City Dubai",
-    width: 1600,
-    height: 1067,
+    alt: "Expo Hills green areas and open spaces, Expo City Dubai",
+    width: 1920,
+    height: 1200,
   },
   {
     src: "/assets/lifestyle-tracks.webp",
-    alt: "Expo City Hills 1 jogging tracks through green space, Expo City Dubai",
-    width: 1600,
-    height: 1067,
+    alt: "Expo Hills wadi-style landscape, Expo City Dubai",
+    width: 1920,
+    height: 1200,
   },
 ];
 

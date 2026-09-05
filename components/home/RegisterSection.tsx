@@ -23,8 +23,7 @@ export default function RegisterSection() {
           </h2>
           <p className="mt-5 text-sm leading-relaxed text-foreground/70">
             Pricing and floor plans for Expo City Hills 1 are confirmed directly with registered
-            buyers. Register below and we will walk you through current availability for your
-            preferred building (1A or 1B) and unit type.
+            buyers. Register below and we will walk you through current availability.
           </p>
 
           {submitted ? (
@@ -33,51 +32,23 @@ export default function RegisterSection() {
             </p>
           ) : (
             <form onSubmit={handleSubmit} className="mt-10 space-y-5" noValidate>
-              <div className="grid gap-5 sm:grid-cols-2">
-                <div>
-                  <label htmlFor="firstName" className="text-sm text-foreground/85">
-                    First name <span className="text-red-500">*</span>
-                  </label>
-                  <input id="firstName" name="firstName" required autoComplete="given-name" className={INPUT} />
-                </div>
-                <div>
-                  <label htmlFor="lastName" className="text-sm text-foreground/85">
-                    Last name <span className="text-red-500">*</span>
-                  </label>
-                  <input id="lastName" name="lastName" required autoComplete="family-name" className={INPUT} />
-                </div>
+              <div>
+                <label htmlFor="name" className="text-sm text-foreground/85">
+                  Name <span className="text-red-500">*</span>
+                </label>
+                <input id="name" name="name" required autoComplete="name" className={INPUT} />
+              </div>
+              <div>
+                <label htmlFor="phone" className="text-sm text-foreground/85">
+                  Phone <span className="text-red-500">*</span>
+                </label>
+                <input id="phone" name="phone" type="tel" required autoComplete="tel" className={INPUT} />
               </div>
               <div>
                 <label htmlFor="email" className="text-sm text-foreground/85">
                   Email <span className="text-red-500">*</span>
                 </label>
                 <input id="email" name="email" type="email" required autoComplete="email" className={INPUT} />
-              </div>
-              <div>
-                <label htmlFor="phone" className="text-sm text-foreground/85">
-                  Phone / WhatsApp <span className="text-red-500">*</span>
-                </label>
-                <input id="phone" name="phone" type="tel" required autoComplete="tel" className={INPUT} />
-              </div>
-              <div>
-                <label htmlFor="unitType" className="text-sm text-foreground/85">
-                  Preferred unit type
-                </label>
-                <select id="unitType" name="unitType" className={INPUT} defaultValue="">
-                  <option value="" disabled>
-                    Select unit type
-                  </option>
-                  <option value="1-bedroom">1-Bedroom</option>
-                  <option value="2-bedroom">2-Bedroom</option>
-                  <option value="3-bedroom">3-Bedroom</option>
-                  <option value="not-decided">Not decided</option>
-                </select>
-              </div>
-              <div>
-                <label htmlFor="message" className="text-sm text-foreground/85">
-                  Message (optional)
-                </label>
-                <textarea id="message" name="message" rows={4} className={INPUT} />
               </div>
               <button type="submit" className="btn-editorial btn-editorial-primary w-full">
                 Register for Expo City Hills 1

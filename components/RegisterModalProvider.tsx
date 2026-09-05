@@ -111,37 +111,17 @@ export default function RegisterModalProvider({ children }: { children: ReactNod
                     {options.building ? `Register for ${options.building}` : "Expo City Hills 1 Pre-Launch"}
                   </h2>
                   <form onSubmit={handleSubmit} className="mt-8 space-y-4" noValidate>
-                    <div className="grid gap-4 sm:grid-cols-2">
-                      <div>
-                        <label htmlFor="modal-first" className="text-sm">First name *</label>
-                        <input id="modal-first" name="firstName" required className={INPUT} />
-                      </div>
-                      <div>
-                        <label htmlFor="modal-last" className="text-sm">Last name *</label>
-                        <input id="modal-last" name="lastName" required className={INPUT} />
-                      </div>
+                    <div>
+                      <label htmlFor="modal-name" className="text-sm">Name *</label>
+                      <input id="modal-name" name="name" required autoComplete="name" className={INPUT} />
+                    </div>
+                    <div>
+                      <label htmlFor="modal-phone" className="text-sm">Phone *</label>
+                      <input id="modal-phone" name="phone" type="tel" required autoComplete="tel" className={INPUT} />
                     </div>
                     <div>
                       <label htmlFor="modal-email" className="text-sm">Email *</label>
-                      <input id="modal-email" name="email" type="email" required className={INPUT} />
-                    </div>
-                    <div>
-                      <label htmlFor="modal-phone" className="text-sm">Phone / WhatsApp *</label>
-                      <input id="modal-phone" name="phone" type="tel" required className={INPUT} />
-                    </div>
-                    <div>
-                      <label htmlFor="modal-unit" className="text-sm">Preferred unit type</label>
-                      <select id="modal-unit" name="unitType" className={INPUT} defaultValue="">
-                        <option value="" disabled>Select</option>
-                        <option value="1-bedroom">1-Bedroom</option>
-                        <option value="2-bedroom">2-Bedroom</option>
-                        <option value="3-bedroom">3-Bedroom</option>
-                        <option value="not-decided">Not decided</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label htmlFor="modal-msg" className="text-sm">Message (optional)</label>
-                      <textarea id="modal-msg" name="message" rows={3} className={INPUT} />
+                      <input id="modal-email" name="email" type="email" required autoComplete="email" className={INPUT} />
                     </div>
                     <button type="submit" className="btn-editorial btn-editorial-primary w-full">
                       {options.submitLabel ?? "Register for Expo City Hills 1"}
