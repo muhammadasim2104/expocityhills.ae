@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
+import PhoneField from "@/components/PhoneField";
 import {
   getSourcePageForSubmit,
   getTrafficChannelForSubmit,
@@ -12,21 +13,6 @@ import { resolveProject } from "@/lib/leads/projects";
 import { useFormFunnel } from "@/hooks/use-form-funnel";
 
 const FORM_NAME = "project_inquiry";
-
-const COUNTRY_CODES = [
-  { code: "AE", dial: "+971", flag: "🇦🇪", label: "UAE" },
-  { code: "GB", dial: "+44", flag: "🇬🇧", label: "UK" },
-  { code: "IN", dial: "+91", flag: "🇮🇳", label: "India" },
-  { code: "US", dial: "+1", flag: "🇺🇸", label: "US" },
-  { code: "SA", dial: "+966", flag: "🇸🇦", label: "Saudi Arabia" },
-  { code: "QA", dial: "+974", flag: "🇶🇦", label: "Qatar" },
-  { code: "KW", dial: "+965", flag: "🇰🇼", label: "Kuwait" },
-  { code: "OM", dial: "+968", flag: "🇴🇲", label: "Oman" },
-  { code: "BH", dial: "+973", flag: "🇧🇭", label: "Bahrain" },
-  { code: "PK", dial: "+92", flag: "🇵🇰", label: "Pakistan" },
-] as const;
-
-type CountryDial = (typeof COUNTRY_CODES)[number]["dial"];
 
 const INPUT =
   "mt-2 w-full rounded-lg border border-forest/15 bg-cream px-4 py-3.5 text-sm text-foreground placeholder:text-foreground/30 focus:border-gold/50 focus:outline-none focus:ring-1 focus:ring-gold/30";
@@ -57,18 +43,15 @@ export default function RegistrationForm({
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [countryDial, setCountryDial] = useState<CountryDial>(COUNTRY_CODES[0].dial);
-  const [phoneNational, setPhoneNational] = useState("");
+  const [phone, setPhone] = useState("");
 
   const getFieldValues = () => {
     const form = formRef.current;
     const formData = form ? new FormData(form) : null;
-    const digits = phoneNational.replace(/\D/g, "");
     return {
       full_name: String(formData?.get("name") ?? "").trim(),
       email: String(formData?.get("email") ?? "").trim(),
-      phone: digits ? `${countryDial}${digits}` : "",
-      country_code: countryDial,
+      phone: phone.trim(),
     };
   };
 
@@ -89,8 +72,7 @@ export default function RegistrationForm({
     setSubmitted(false);
     setSubmitting(false);
     setError(null);
-    setCountryDial(COUNTRY_CODES[0].dial);
-    setPhoneNational("");
+    setPhone("");
   }, [projectName, active]);
 
   function handleClose() {
@@ -104,9 +86,13 @@ export default function RegistrationForm({
 
     const form = e.currentTarget;
     const formData = new FormData(form);
-    const digits = phoneNational.replace(/\D/g, "");
-    const phone = `${countryDial}${digits}`;
+    const phoneValue = phone.trim();
     const fieldHints = captureFieldHints();
+
+    if (phoneValue.replace(/\D/g, "").length < 8) {
+      setError("Please enter a valid phone number with country code.");
+      return;
+    }
 
     setSubmitting(true);
 
@@ -117,7 +103,7 @@ export default function RegistrationForm({
         body: JSON.stringify({
           name: String(formData.get("name") ?? "").trim(),
           email: String(formData.get("email") ?? "").trim(),
-          phone,
+          phone: phoneValue,
           project: project.name,
           project_slug: project.slug,
           source_page: getSourcePageForSubmit(),
@@ -215,52 +201,17 @@ export default function RegistrationForm({
         <label htmlFor={`${idPrefix}-phone`} className="text-sm text-foreground/85">
           Phone <span className="text-red-500">*</span>
         </label>
-        <div className="mt-2 flex overflow-hidden rounded-lg border border-forest/15 bg-cream focus-within:border-gold/50 focus-within:ring-1 focus-within:ring-gold/30">
-          <div className="relative flex shrink-0 items-center border-r border-forest/15">
-            <label htmlFor={`${idPrefix}-country`} className="sr-only">
-              Country code
-            </label>
-            <select
-              id={`${idPrefix}-country`}
-              name="countryCode"
-              value={countryDial}
-              onChange={(e) => {
-                setCountryDial(e.target.value as CountryDial);
-                notifyFieldChange();
-              }}
-              disabled={submitting}
-              className="cursor-pointer appearance-none bg-transparent py-3.5 pl-3 pr-8 text-sm text-foreground focus:outline-none"
-              aria-label="Country code"
-            >
-              {COUNTRY_CODES.map((country) => (
-                <option key={country.code} value={country.dial}>
-                  {country.flag} {country.dial}
-                </option>
-              ))}
-            </select>
-            <span
-              className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-xs text-foreground/50"
-              aria-hidden="true"
-            >
-              ▼
-            </span>
-          </div>
-          <input
-            type="tel"
-            id={`${idPrefix}-phone`}
-            name="phoneNational"
-            required
-            autoComplete="tel-national"
-            placeholder="50 123 4567"
-            value={phoneNational}
-            onChange={(e) => {
-              setPhoneNational(e.target.value);
-              notifyFieldChange();
-            }}
-            disabled={submitting}
-            className="min-w-0 flex-1 border-0 bg-transparent px-4 py-3.5 text-sm text-foreground focus:outline-none"
-          />
-        </div>
+        <PhoneField
+          id={`${idPrefix}-phone`}
+          name="phone"
+          value={phone}
+          onChange={(next) => {
+            setPhone(next);
+            notifyFieldChange();
+          }}
+          disabled={submitting}
+          required
+        />
       </div>
 
       <div>
