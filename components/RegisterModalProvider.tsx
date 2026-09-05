@@ -6,9 +6,9 @@ import {
   useContext,
   useEffect,
   useState,
-  type FormEvent,
   type ReactNode,
 } from "react";
+import RegistrationForm from "@/components/RegistrationForm";
 
 type RegisterOptions = {
   building?: string;
@@ -28,23 +28,18 @@ export function useRegisterModal() {
   return ctx;
 }
 
-const INPUT =
-  "mt-2 w-full rounded-lg border border-forest/15 bg-cream px-4 py-3.5 text-sm text-foreground placeholder:text-foreground/30 focus:border-gold/50 focus:outline-none focus:ring-1 focus:ring-gold/30";
-
 export default function RegisterModalProvider({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
   const [options, setOptions] = useState<RegisterOptions>({});
 
   const openRegister = useCallback((opts?: RegisterOptions) => {
     setOptions(opts ?? {});
-    setSubmitted(false);
     setOpen(true);
   }, []);
 
   const closeRegister = useCallback(() => {
     setOpen(false);
-    setSubmitted(false);
+    setOptions({});
   }, []);
 
   useEffect(() => {
@@ -62,11 +57,6 @@ export default function RegisterModalProvider({ children }: { children: ReactNod
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [open, closeRegister]);
-
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setSubmitted(true);
-  }
 
   return (
     <RegisterContext.Provider value={{ openRegister, closeRegister }}>
@@ -94,41 +84,23 @@ export default function RegisterModalProvider({ children }: { children: ReactNod
               ✕
             </button>
             <div className="px-6 py-8 sm:px-8 sm:py-10">
-              {submitted ? (
-                <div className="py-4 text-center">
-                  <p className="font-serif text-2xl font-light text-forest">Thank you</p>
-                  <p className="mt-4 text-sm leading-relaxed text-foreground/65">
-                    Your Expo City Hills 1 expert will be in touch with all the details.
-                  </p>
-                  <button type="button" onClick={closeRegister} className="btn-editorial btn-editorial-primary mt-8 w-full">
-                    Close
-                  </button>
-                </div>
-              ) : (
-                <>
-                  <p className="label-caps text-gold">Register Your Interest</p>
-                  <h2 id="register-title" className="mt-4 font-serif text-2xl font-light text-forest">
-                    {options.building ? `Register for ${options.building}` : "Expo City Hills 1 Pre-Launch"}
-                  </h2>
-                  <form onSubmit={handleSubmit} className="mt-8 space-y-4" noValidate>
-                    <div>
-                      <label htmlFor="modal-name" className="text-sm">Name *</label>
-                      <input id="modal-name" name="name" required autoComplete="name" className={INPUT} />
-                    </div>
-                    <div>
-                      <label htmlFor="modal-phone" className="text-sm">Phone *</label>
-                      <input id="modal-phone" name="phone" type="tel" required autoComplete="tel" className={INPUT} />
-                    </div>
-                    <div>
-                      <label htmlFor="modal-email" className="text-sm">Email *</label>
-                      <input id="modal-email" name="email" type="email" required autoComplete="email" className={INPUT} />
-                    </div>
-                    <button type="submit" className="btn-editorial btn-editorial-primary w-full">
-                      {options.submitLabel ?? "Register for Expo City Hills 1"}
-                    </button>
-                  </form>
-                </>
-              )}
+              <p className="label-caps text-gold">Register Your Interest</p>
+              <h2 id="register-title" className="mt-4 font-serif text-2xl font-light text-forest">
+                {options.building
+                  ? `Register for ${options.building}`
+                  : "Expo City Hills 1 Pre-Launch"}
+              </h2>
+              <div className="mt-8">
+                <RegistrationForm
+                  projectName={options.building}
+                  submitLabel={options.submitLabel ?? "Register for Expo City Hills 1"}
+                  surface="modal"
+                  active={open}
+                  onClose={closeRegister}
+                  showClose
+                  idPrefix="modal"
+                />
+              </div>
             </div>
           </div>
         </div>
