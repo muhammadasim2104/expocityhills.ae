@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import BuildingPageContent from "@/components/building/BuildingPageContent";
-import { Breadcrumbs } from "@/components/Sections";
 import {
   buildings,
   getBuildingBySlug,
@@ -52,14 +51,14 @@ export default async function BuildingPage({ params }: Props) {
           createFaqJsonLd(faqs),
         ]}
       />
-      <Breadcrumbs
-        items={[
+      <BuildingPageContent
+        building={building}
+        breadcrumbs={[
           { name: "Home", path: "/" },
           { name: "Expo City Hills 1", path: "/" },
           { name: building.name, path: `/${building.slug}` },
         ]}
       />
-      <BuildingPageContent building={building} />
     </>
   );
 }

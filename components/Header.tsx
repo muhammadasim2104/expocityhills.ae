@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import RegisterButton from "@/components/RegisterButton";
+import SiteLogo from "@/components/SiteLogo";
 import { navLinks } from "@/lib/data";
 
 export default function Header() {
@@ -38,13 +39,11 @@ export default function Header() {
         overlay ? "border-transparent bg-transparent" : "border-b border-forest/10 bg-background/95 backdrop-blur-md"
       }`}
     >
-      <div className="site-container relative grid grid-cols-[1fr_auto_1fr] items-center gap-3 py-4 lg:gap-4 lg:py-5">
-        <Link
-          href="/"
-          className={`justify-self-start font-serif text-lg font-semibold tracking-wide ${overlay ? "text-white" : "text-forest"}`}
-        >
-          Expo City Hills
-        </Link>
+      <div className="site-container relative grid grid-cols-[1fr_auto_1fr] items-center gap-3 py-3 lg:gap-4 lg:py-4">
+        <SiteLogo
+          variant={overlay ? "light" : "dark"}
+          className="justify-self-start"
+        />
 
         <nav className="hidden items-center gap-8 lg:flex" aria-label="Main">
           {navLinks.map((link) => (

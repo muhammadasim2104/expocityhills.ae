@@ -1,4 +1,5 @@
 import Link from "next/link";
+import SiteLogo from "@/components/SiteLogo";
 import { footerLinks, navLinks, siteConfig } from "@/lib/data";
 import { discoveryFiles } from "@/lib/site-discovery";
 
@@ -8,9 +9,7 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between">
           <div>
-            <p className="font-serif text-xl font-semibold text-white">
-              Expo City Hills
-            </p>
+            <SiteLogo variant="light" href="/" />
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/60">
               Low-rise eco-luxury residences in Expo Hills district, Expo City
               Dubai — pre-launch by Dubai South Properties.

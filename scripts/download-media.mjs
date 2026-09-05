@@ -70,23 +70,6 @@ async function createOgShare(heroPath) {
   console.log("✓ og-share.webp");
 }
 
-async function createFavicons(heroPath) {
-  const publicDir = join(__dirname, "../public");
-  const sizes = [
-    { name: "favicon-16x16.png", size: 16 },
-    { name: "favicon-32x32.png", size: 32 },
-    { name: "apple-touch-icon.png", size: 180 },
-    { name: "android-chrome-192x192.png", size: 192 },
-    { name: "android-chrome-512x512.png", size: 512 },
-  ];
-  for (const { name, size } of sizes) {
-    await sharp(heroPath).resize(size, size, { fit: "cover" }).png().toFile(join(publicDir, name));
-    console.log(`✓ ${name}`);
-  }
-  await sharp(heroPath).resize(32, 32).png().toFile(join(publicDir, "favicon.ico"));
-  console.log("✓ favicon.ico");
-}
-
 async function main() {
   await mkdir(assetsDir, { recursive: true });
   for (const { file, url } of assets) {
@@ -94,7 +77,7 @@ async function main() {
   }
   const heroPath = join(assetsDir, "hero-aerial.webp");
   await createOgShare(heroPath);
-  await createFavicons(heroPath);
+  console.log("ℹ Favicons: run npm run brand-assets");
 }
 
 main().catch((err) => {

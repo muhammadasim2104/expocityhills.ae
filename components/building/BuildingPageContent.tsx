@@ -5,6 +5,7 @@ import FactsTable from "@/components/FactsTable";
 import FaqBlock from "@/components/FaqBlock";
 import RegisterSection from "@/components/home/RegisterSection";
 import RegisterButton from "@/components/RegisterButton";
+import { Breadcrumbs } from "@/components/Sections";
 import {
   buildings,
   getBuildingResourceLinks,
@@ -30,7 +31,13 @@ function SubpageLinks({ slug }: { slug: BuildingSlug }) {
   );
 }
 
-export default function BuildingPageContent({ building }: { building: Building }) {
+export default function BuildingPageContent({
+  building,
+  breadcrumbs,
+}: {
+  building: Building;
+  breadcrumbs: { name: string; path: string }[];
+}) {
   const faqs = getBuildingFaqs(building.name);
 
   return (
@@ -44,6 +51,7 @@ export default function BuildingPageContent({ building }: { building: Building }
         exploreText="Compare Expo City Hills buildings"
         exploreHref="/#buildings"
       />
+      <Breadcrumbs items={breadcrumbs} />
 
       <section className="bg-background py-16 lg:py-24">
         <div className="site-container">

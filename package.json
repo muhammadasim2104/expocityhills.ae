@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "download-media": "node scripts/download-media.mjs"
+    "download-media": "node scripts/download-media.mjs",
+    "brand-assets": "node scripts/brand-assets.mjs"
   },
   "dependencies": {
     "next": "16.3.3",
